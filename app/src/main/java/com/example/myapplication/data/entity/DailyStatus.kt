@@ -22,5 +22,6 @@ data class DailyStatus(
     val id: Int = 0,
     val hitmakerId: Int,
     val date: Long, // Start of day timestamp
-    val isDone: Boolean
+    val isDone: Boolean,
+    val progress: Float = 0f // 0.0 to 1.0 progress
 )

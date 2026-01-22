@@ -9,5 +9,7 @@ data class Hitmaker(
     val id: Int = 0,
     val name: String,
     val color: Long, // Hex color as Long (e.g. 0xFF22C55EL)
-    val startDate: Long // Timestamp
+    val startDate: Long, // Timestamp
+    val icon: String = "Star", // Icon name key
+    val priority: Int = 0
 )

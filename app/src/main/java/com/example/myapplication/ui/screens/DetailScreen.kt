@@ -16,6 +16,8 @@ import com.example.myapplication.data.entity.DailyStatus
 import com.example.myapplication.data.entity.Hitmaker
 import com.example.myapplication.ui.components.YearHeatmap
 import com.example.myapplication.ui.viewmodel.HitmakerViewModel
+import com.example.myapplication.ui.components.Sticker
+import com.example.myapplication.ui.theme.HitmakerIcons
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.temporal.ChronoUnit
@@ -69,18 +71,34 @@ fun DetailScreen(
             hitmaker?.let { h ->
                 Spacer(modifier = Modifier.height(16.dp))
                 
-                Text(
-                    text = h.name,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
+                Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                    Sticker(
+                        icon = HitmakerIcons.getIcon(h.icon),
+                        habitColor = Color(h.color),
+                        size = 64.dp
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Text(
+                        text = h.name,
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                }
                 
-                Text(
-                    text = "Year ${today.year}",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color(0xFFB0B0B0)
-                )
+                Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                    Sticker(
+                        icon = HitmakerIcons.getIcon(h.icon),
+                        habitColor = Color(h.color),
+                        size = 24.dp
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Year ${today.year}",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = Color(0xFFB0B0B0)
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(12.dp))
 

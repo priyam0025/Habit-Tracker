@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.myapplication.data.entity.DailyStatus
 import com.example.myapplication.data.entity.Hitmaker
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +14,13 @@ interface HitmakerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHitmaker(hitmaker: Hitmaker)
 
-    @Query("SELECT * FROM hitmakers")
+    @Update
+    suspend fun updateHitmaker(hitmaker: Hitmaker)
+
+    @Update
+    suspend fun updateHitmakers(hitmakers: List<Hitmaker>)
+
+    @Query("SELECT * FROM hitmakers ORDER BY priority ASC")
     fun getAllHitmakers(): Flow<List<Hitmaker>>
 
     @Query("SELECT * FROM hitmakers WHERE id = :id")
@@ -24,6 +31,9 @@ interface HitmakerDao {
 
     @Query("SELECT * FROM daily_status WHERE hitmakerId = :hitmakerId")
     fun getDailyStatusesForHitmaker(hitmakerId: Int): Flow<List<DailyStatus>>
+    
+    @Query("SELECT * FROM daily_status")
+    fun getAllDailyStatuses(): Flow<List<DailyStatus>>
 
     @Query("SELECT * FROM daily_status WHERE hitmakerId = :hitmakerId AND date = :date LIMIT 1")
     suspend fun getDailyStatusByDate(hitmakerId: Int, date: Long): DailyStatus?

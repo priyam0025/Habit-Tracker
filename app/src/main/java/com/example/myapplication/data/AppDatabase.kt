@@ -8,7 +8,7 @@ import com.example.myapplication.data.dao.HitmakerDao
 import com.example.myapplication.data.entity.DailyStatus
 import com.example.myapplication.data.entity.Hitmaker
 
-@Database(entities = [Hitmaker::class, DailyStatus::class], version = 1, exportSchema = false)
+@Database(entities = [Hitmaker::class, DailyStatus::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun hitmakerDao(): HitmakerDao
 
@@ -22,7 +22,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "hitmaker_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }

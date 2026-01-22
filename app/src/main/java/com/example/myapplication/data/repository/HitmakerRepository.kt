@@ -32,6 +32,12 @@ class HitmakerRepository(private val hitmakerDao: HitmakerDao) {
         hitmakerDao.updateHitmakerName(id, newName)
     }
 
+    suspend fun updateHitmakersOrder(hitmakers: List<Hitmaker>) {
+        hitmakerDao.updateHitmakers(hitmakers)
+    }
+
+    val allDailyStatuses: Flow<List<DailyStatus>> = hitmakerDao.getAllDailyStatuses()
+
     suspend fun deleteHitmaker(id: Int) {
         hitmakerDao.deleteHitmaker(id)
     }
