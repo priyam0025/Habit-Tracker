@@ -22,6 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
+import com.example.myapplication.R
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import com.example.myapplication.data.entity.Hitmaker
 import com.example.myapplication.ui.viewmodel.HitmakerViewModel
@@ -74,14 +76,25 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Header Title
-            Text(
-                text = "Hitmaker",
-                style = MaterialTheme.typography.headlineMedium,
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
+            // Header Title with Icon
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp)
-            )
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_logo),
+                    contentDescription = null,
+                    tint = themeColor, // Tinted with current theme color
+                    modifier = Modifier.size(32.dp)
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(
+                    text = "Hitmaker",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
             // 1. TOP WEEK BAR (Highest Priority)
             WeekBar(
