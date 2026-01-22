@@ -46,6 +46,30 @@ class HitmakerViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun moveUp(id: Int) {
+        viewModelScope.launch {
+            val currentList = allHitmakers.first().sortedBy { it.priority }.toMutableList()
+            val index = currentList.indexOfFirst { it.id == id }
+            if (index > 0) {
+                val item = currentList.removeAt(index)
+                currentList.add(index - 1, item)
+                reorderHitmakers(currentList)
+            }
+        }
+    }
+
+    fun moveDown(id: Int) {
+        viewModelScope.launch {
+            val currentList = allHitmakers.first().sortedBy { it.priority }.toMutableList()
+            val index = currentList.indexOfFirst { it.id == id }
+            if (index != -1 && index < currentList.size - 1) {
+                val item = currentList.removeAt(index)
+                currentList.add(index + 1, item)
+                reorderHitmakers(currentList)
+            }
+        }
+    }
+
     fun markAsDone(hitmakerId: Int, isDone: Boolean = true, progress: Float = 1.0f) {
         viewModelScope.launch {
             val today = LocalDate.now().atStartOfDay().toEpochSecond(ZoneOffset.UTC) * 1000

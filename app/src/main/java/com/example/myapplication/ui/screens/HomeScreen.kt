@@ -40,9 +40,10 @@ fun HomeScreen(
     val allStatuses by viewModel.allDailyStatuses.collectAsState(initial = emptyList())
     
     var showAddSheet by remember { mutableStateOf(false) }
+    var habitToRename by remember { mutableStateOf<Hitmaker?>(null) }
+    var newHabitName by remember { mutableStateOf("") }
     
     // Derived State for UI
-    // Sorting by priority ensure the top one is indeed the priority habit
     val sortedHitmakers = remember(hitmakers) { 
         hitmakers.sortedBy { it.priority } 
     }
@@ -73,6 +74,15 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
+            // Header Title
+            Text(
+                text = "Hitmaker",
+                style = MaterialTheme.typography.headlineMedium,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp)
+            )
+
             // 1. TOP WEEK BAR (Highest Priority)
             WeekBar(
                 themeColor = themeColor,
@@ -110,6 +120,13 @@ fun HomeScreen(
                             viewModel.markAsDone(hitmaker.id, !isDone)
                         },
                         onClick = { onHitmakerClick(hitmaker.id) },
+                        onDelete = { viewModel.deleteHitmaker(hitmaker.id) },
+                        onRename = { 
+                            habitToRename = hitmaker
+                            newHabitName = hitmaker.name
+                        },
+                        onMoveUp = { viewModel.moveUp(hitmaker.id) },
+                        onMoveDown = { viewModel.moveDown(hitmaker.id) },
                         modifier = Modifier
                             .animateItem(
                                 placementSpec = spring(stiffness = Spring.StiffnessMediumLow)
@@ -117,7 +134,6 @@ fun HomeScreen(
                             .combinedClickable(
                                 onClick = { onHitmakerClick(hitmaker.id) },
                                 onLongClick = {
-                                    // Implementation of Priority move: Move to top
                                     val newList = sortedHitmakers.toMutableList()
                                     val item = newList.removeAt(index)
                                     newList.add(0, item)
@@ -129,6 +145,40 @@ fun HomeScreen(
             }
         }
         
+        // Rename Dialog
+        if (habitToRename != null) {
+            AlertDialog(
+                onDismissRequest = { habitToRename = null },
+                title = { Text("Rename Habit", color = Color.White) },
+                text = {
+                    TextField(
+                        value = newHabitName,
+                        onValueChange = { newHabitName = it },
+                        colors = TextFieldDefaults.colors(
+                            focusedTextColor = Color.White,
+                            unfocusedTextColor = Color.White,
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent
+                        )
+                    )
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        habitToRename?.let { viewModel.renameHitmaker(it.id, newHabitName) }
+                        habitToRename = null
+                    }) {
+                        Text("Rename", color = themeColor)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { habitToRename = null }) {
+                        Text("Cancel", color = Color.Gray)
+                    }
+                },
+                containerColor = Color(0xFF1E1E1E)
+            )
+        }
+
         if (showAddSheet) {
             AddHitmakerSheet(
                 onDismiss = { showAddSheet = false },

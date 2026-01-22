@@ -9,8 +9,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowDownward
+import androidx.compose.material.icons.rounded.ArrowUpward
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.LocalFireDepartment
+import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,6 +39,10 @@ fun HabitCard(
     statuses: List<DailyStatus>,
     onCompleteClick: () -> Unit,
     onClick: () -> Unit,
+    onDelete: () -> Unit = {},
+    onRename: () -> Unit = {},
+    onMoveUp: () -> Unit = {},
+    onMoveDown: () -> Unit = {},
     isDragging: Boolean = false,
     modifier: Modifier = Modifier
 ) {
@@ -52,6 +61,8 @@ fun HabitCard(
     )
     
     val elevation by animateDpAsState(if (isDragging) 12.dp else 0.dp, label = "Elevation")
+
+    var showMenu by remember { mutableStateOf(false) }
 
     Surface(
         color = surfaceColor,
@@ -139,11 +150,51 @@ fun HabitCard(
                         modifier = Modifier.size(24.dp)
                     )
                 } else {
-                    // Empty state dot or just empty
                     Box(
                         modifier = Modifier
                             .size(6.dp)
                             .background(Color.Gray.copy(alpha = 0.3f), CircleShape)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // More Menu
+            Box {
+                IconButton(onClick = { showMenu = true }) {
+                    Icon(
+                        imageVector = Icons.Rounded.MoreVert,
+                        contentDescription = "More",
+                        tint = Color.Gray
+                    )
+                }
+
+                DropdownMenu(
+                    expanded = showMenu,
+                    onDismissRequest = { showMenu = false },
+                    modifier = Modifier.background(Color(0xFF1E1E1E))
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Rename", color = Color.White) },
+                        onClick = { onRename(); showMenu = false },
+                        leadingIcon = { Icon(Icons.Rounded.Edit, contentDescription = null, tint = Color.White) }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Move Up", color = Color.White) },
+                        onClick = { onMoveUp(); showMenu = false },
+                        leadingIcon = { Icon(Icons.Rounded.ArrowUpward, contentDescription = null, tint = Color.White) }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Move Down", color = Color.White) },
+                        onClick = { onMoveDown(); showMenu = false },
+                        leadingIcon = { Icon(Icons.Rounded.ArrowDownward, contentDescription = null, tint = Color.White) }
+                    )
+                    HorizontalDivider(color = Color.White.copy(alpha = 0.1f))
+                    DropdownMenuItem(
+                        text = { Text("Delete", color = Color.Red) },
+                        onClick = { onDelete(); showMenu = false },
+                        leadingIcon = { Icon(Icons.Rounded.Delete, contentDescription = null, tint = Color.Red) }
                     )
                 }
             }

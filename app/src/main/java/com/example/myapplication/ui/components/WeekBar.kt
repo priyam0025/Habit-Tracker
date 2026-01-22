@@ -103,7 +103,7 @@ fun DayRing(
 ) {
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
-        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumLow),
+        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy),
         label = "Progress"
     )
     
