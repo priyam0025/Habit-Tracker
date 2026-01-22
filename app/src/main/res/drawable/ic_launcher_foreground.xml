@@ -1,39 +1,46 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="512"
-    android:viewportHeight="512">
-    <!-- Grid Group (translated 168, 168) -->
-    <!-- Row 1 -->
-    <path
-        android:fillColor="#2A2A2A"
-        android:pathData="M178,168h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
-    <path
-        android:fillColor="#22C55E"
-        android:pathData="M242,168h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
-    <path
-        android:fillColor="#2A2A2A"
-        android:pathData="M306,168h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Centered Logo Group -->
+    <group
+        android:translateX="27"
+        android:translateY="27">
+        
+        <!-- Row 1 -->
+        <path
+            android:fillColor="#2A2A2A"
+            android:pathData="M2,2h14c1,0 2,1 2,2v14c0,1-1,2-2,2H2c-1,0-2-1-2-2V4c0-1 1-2 2-2z" />
+        <path
+            android:fillColor="#22C55E"
+            android:pathData="M20,2h14c1,0 2,1 2,2v14c0,1-1,2-2,2H20c-1,0-2-1-2-2V4c0-1 1-2 2-2z" />
+        <path
+            android:fillColor="#2A2A2A"
+            android:pathData="M38,2h14c1,0 2,1 2,2v14c0,1-1,2-2,2H38c-1,0-2-1-2-2V4c0-1 1-2 2-2z" />
 
-    <!-- Row 2 -->
-    <path
-        android:fillColor="#22C55E"
-        android:pathData="M178,232h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
-    <path
-        android:fillColor="#22C55E"
-        android:pathData="M242,232h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
-    <path
-        android:fillColor="#22C55E"
-        android:pathData="M306,232h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
+        <!-- Row 2 -->
+        <path
+            android:fillColor="#22C55E"
+            android:pathData="M2,20h14c1,0 2,1 2,2v14c0,1-1,2-2,2H2c-1,0-2-1-2-2v-14c0-1 1-2 2-2z" />
+        <path
+            android:fillColor="#22C55E"
+            android:pathData="M20,20h14c1,0 2,1 2,2v14c0,1-1,2-2,2H20c-1,0-2-1-2-2v-14c0-1 1-2 2-2z" />
+        <path
+            android:fillColor="#3B82F6"
+            android:pathData="M38,20h14c1,0 2,1 2,2v14c0,1-1,2-2,2H38c-1,0-2-1-2-2v-14c0-1 1-2 2-2z" />
 
-    <!-- Row 3 -->
-    <path
-        android:fillColor="#2A2A2A"
-        android:pathData="M178,296h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
-    <path
-        android:fillColor="#22C55E"
-        android:pathData="M242,296h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
-    <path
-        android:fillColor="#2A2A2A"
-        android:pathData="M306,296h28c5.5,0 10,4.5 10,10v28c0,5.5 -4.5,10 -10,10h-28c-5.5,0 -10,-4.5 -10,-10v-28c0,-5.5 4.5,-10 10,-10z" />
+        <!-- Row 3 -->
+        <path
+            android:fillColor="#2A2A2A"
+            android:pathData="M2,38h14c1,0 2,1 2,2v14c0,1-1,2-2,2H2c-1,0-2-1-2-2v-14c0-1 1-2 2-2z" />
+        <path
+            android:fillColor="#3B82F6"
+            android:pathData="M20,38h14c1,0 2,1 2,2v14c0,1-1,2-2,2H20c-1,0-2-1-2-2v-14c0-1 1-2 2-2z" />
+        <path
+            android:fillColor="#2A2A2A"
+            android:pathData="M38,38h14c1,0 2,1 2,2v14c0,1-1,2-2,2H38c-1,0-2-1-2-2v-14c0-1 1-2 2-2z" />
+            
+    </group>
 </vector>

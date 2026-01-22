@@ -84,8 +84,10 @@ fun HomeScreen(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_logo),
                     contentDescription = null,
-                    tint = themeColor, // Tinted with current theme color
-                    modifier = Modifier.size(32.dp)
+                    tint = Color.Unspecified, // Keep original SVG colors (Black background + Green/Gray grid)
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(RoundedCornerShape(8.dp))
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
