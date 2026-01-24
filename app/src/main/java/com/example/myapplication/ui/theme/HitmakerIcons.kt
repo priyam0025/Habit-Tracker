@@ -55,7 +55,21 @@ object HitmakerIcons {
         HabitIcon("Target", Icons.Rounded.TrackChanges, "Generic"),
         HabitIcon("Flame", Icons.Rounded.LocalFireDepartment, "Generic"),
         HabitIcon("Calendar", Icons.Rounded.CalendarMonth, "Generic"),
-        HabitIcon("Flag", Icons.Rounded.Flag, "Generic")
+        HabitIcon("Flag", Icons.Rounded.Flag, "Generic"),
+        HabitIcon("Love", Icons.Rounded.Favorite, "Generic"),
+        HabitIcon("Sparkling", Icons.Rounded.AutoAwesome, "Health"),
+        HabitIcon("Gooning", Icons.Rounded.Visibility, "Generic"),
+        HabitIcon("Gaming", Icons.Rounded.Gamepad, "Lifestyle"),
+        HabitIcon("Food", Icons.Rounded.Fastfood, "Lifestyle"),
+        HabitIcon("Work", Icons.Rounded.Work, "Study"),
+        HabitIcon("Journal", Icons.Rounded.HistoryEdu, "Creative"),
+        HabitIcon("Art", Icons.Rounded.Palette, "Creative"),
+        HabitIcon("Home", Icons.Rounded.Home, "Lifestyle"),
+        HabitIcon("Pets", Icons.Rounded.Pets, "Lifestyle"),
+        HabitIcon("Energy", Icons.Rounded.Bolt, "Generic"),
+        HabitIcon("Timer", Icons.Rounded.Timer, "Generic"),
+        HabitIcon("Movie", Icons.Rounded.Movie, "Creative"),
+        HabitIcon("Money", Icons.Rounded.ShoppingBag, "Lifestyle")
     )
 
     fun getIcon(name: String): ImageVector {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hitmaker</string>
+    <string name="widget_description">Shows your monthly progress heatmap for a habit.</string>
 </resources>

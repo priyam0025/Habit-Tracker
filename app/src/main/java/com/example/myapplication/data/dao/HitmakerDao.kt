@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HitmakerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHitmaker(hitmaker: Hitmaker)
+    suspend fun insertHitmaker(hitmaker: Hitmaker): Long
 
     @Update
     suspend fun updateHitmaker(hitmaker: Hitmaker)

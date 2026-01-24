@@ -8,8 +8,12 @@ import kotlinx.coroutines.flow.Flow
 class HitmakerRepository(private val hitmakerDao: HitmakerDao) {
     val allHitmakers: Flow<List<Hitmaker>> = hitmakerDao.getAllHitmakers()
 
-    suspend fun insertHitmaker(hitmaker: Hitmaker) {
-        hitmakerDao.insertHitmaker(hitmaker)
+    suspend fun insertHitmaker(hitmaker: Hitmaker): Long {
+        return hitmakerDao.insertHitmaker(hitmaker)
+    }
+
+    suspend fun updateHitmaker(hitmaker: Hitmaker) {
+        hitmakerDao.updateHitmaker(hitmaker)
     }
 
     suspend fun getHitmakerById(id: Int): Hitmaker? {

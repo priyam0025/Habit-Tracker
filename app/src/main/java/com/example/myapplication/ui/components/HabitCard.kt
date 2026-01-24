@@ -16,6 +16,7 @@ import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.LocalFireDepartment
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.icons.rounded.Widgets
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -41,6 +42,8 @@ fun HabitCard(
     onClick: () -> Unit,
     onDelete: () -> Unit = {},
     onRename: () -> Unit = {},
+    onViewStats: () -> Unit = {},
+    onAddWidget: () -> Unit = {},
     onMoveUp: () -> Unit = {},
     onMoveDown: () -> Unit = {},
     isDragging: Boolean = false,
@@ -176,9 +179,19 @@ fun HabitCard(
                     modifier = Modifier.background(Color(0xFF1E1E1E))
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Rename", color = Color.White) },
+                        text = { Text("Edit", color = Color.White) },
                         onClick = { onRename(); showMenu = false },
                         leadingIcon = { Icon(Icons.Rounded.Edit, contentDescription = null, tint = Color.White) }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("View Progress", color = Color.White) },
+                        onClick = { onViewStats(); showMenu = false },
+                        leadingIcon = { Icon(Icons.Rounded.LocalFireDepartment, contentDescription = null, tint = habitColor) }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Add Widget", color = Color.White) },
+                        onClick = { onAddWidget(); showMenu = false },
+                        leadingIcon = { Icon(Icons.Rounded.Widgets, contentDescription = null, tint = Color.White) }
                     )
                     DropdownMenuItem(
                         text = { Text("Move Up", color = Color.White) },

@@ -12,18 +12,28 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.ZoneOffset
+import com.example.myapplication.widget.HabitWidget
+import androidx.glance.appwidget.updateAll
 
 class HitmakerViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: HitmakerRepository
     val allHitmakers: Flow<List<Hitmaker>>
+    private val notificationHelper: com.example.myapplication.reminder.NotificationHelper
 
     init {
         val dao = AppDatabase.getDatabase(application).hitmakerDao()
         repository = HitmakerRepository(dao)
         allHitmakers = repository.allHitmakers
+        notificationHelper = com.example.myapplication.reminder.NotificationHelper(application)
     }
 
-    fun addHitmaker(name: String, color: Long, icon: String) {
+    fun addHitmaker(
+        name: String, 
+        color: Long, 
+        icon: String, 
+        reminderTime: String? = null, 
+        reminderDays: String? = null
+    ) {
         viewModelScope.launch {
             val count = allHitmakers.first().size
             val hitmaker = Hitmaker(
@@ -31,9 +41,28 @@ class HitmakerViewModel(application: Application) : AndroidViewModel(application
                 color = color,
                 startDate = LocalDate.now().atStartOfDay().toEpochSecond(ZoneOffset.UTC) * 1000,
                 icon = icon,
-                priority = count // Add at end
+                priority = count,
+                reminderTime = reminderTime,
+                reminderDays = reminderDays
             )
-            repository.insertHitmaker(hitmaker)
+            val id = repository.insertHitmaker(hitmaker).toInt()
+            
+            if (reminderTime != null) {
+                notificationHelper.scheduleReminder(hitmaker.copy(id = id))
+            }
+            HabitWidget().updateAll(getApplication())
+        }
+    }
+
+    fun updateHitmaker(hitmaker: Hitmaker) {
+        viewModelScope.launch {
+            repository.updateHitmaker(hitmaker)
+            if (hitmaker.reminderTime != null) {
+                notificationHelper.scheduleReminder(hitmaker)
+            } else {
+                notificationHelper.cancelReminder(hitmaker.id)
+            }
+            HabitWidget().updateAll(getApplication())
         }
     }
 
@@ -83,6 +112,7 @@ class HitmakerViewModel(application: Application) : AndroidViewModel(application
                     progress = progress
                 )
             )
+            HabitWidget().updateAll(getApplication())
         }
     }
     
@@ -104,7 +134,9 @@ class HitmakerViewModel(application: Application) : AndroidViewModel(application
 
     fun deleteHitmaker(id: Int) {
         viewModelScope.launch {
+            notificationHelper.cancelReminder(id)
             repository.deleteHitmaker(id)
+            HabitWidget().updateAll(getApplication())
         }
     }
 }
